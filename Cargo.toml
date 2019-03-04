@@ -5,4 +5,5 @@ authors = ["jack <jackorton32@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-stick = "0.4.1"
+joy = "0.1.2"
+rppal = "0.11.1"

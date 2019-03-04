@@ -1,0 +1,21 @@
+extern crate stick;
+
+use stick::Input::*;
+
+fn main() {
+
+    println!("Hello, world!");
+    let mut cm = stick::ControllerManager::new(vec![]);
+    let mut test1 = 0.00;
+    let mut test2 = 0.00;
+    loop {
+        while let Some((_, i)) = cm.update(){
+            match i {
+                        Move(x, y) => {
+			    test1 = y;
+			    test2 = x;
+                        }
+            }
+        }
+    }    println!("y: {}, x: {}", test1, test2);
+}

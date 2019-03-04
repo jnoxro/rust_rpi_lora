@@ -1,27 +1,34 @@
-extern crate stick;
-
-use std::io::stdin;
-//use stick::Input::Move;
+extern crate joy;
+//extern crate null_terminated;
 
 fn main() {
 
-    println!("Hello, world!");
-    let stdin = stdin();
-    let mut cm = stick::ControllerManager::new(vec![]);
-//    let mut test1 = 0.00;
-//    let mut test2 = 0.00;
-    'a: loop {
-        while let Some((j, i)) = cm.update(){
+    println!("running");
 
-	println!("{}: {}", j, i);
-//            match i {
-//                        Move(x, y) => {
-//			    test1 = y;
-//			    test2 = x;
-//                        }
-//            }
+    let mut six_axis = joy::Device::open(b"/dev/input/js0\0").unwrap(); 
+    let mut throt: i32 = 0;
+    let mut throt_val: i32  = 0;
+    let mut _sink = 0;
+
+      loop {
+        for ev in &mut six_axis {
+
+	    use joy::Event::*;
+	    match ev {
+		Axis(5, x) => throt = x.into(),
+	        Axis(_n, _x) => _sink = 1,
+		Button(n, true) => _sink = 1,
+		Button(n, false) => _sink = 1,
+	    }
+//	    throt = throt + 32767;
+//	    throt = throt * 100;
+//	    throt = throt / (32767*2);
         }
-//    println!("x: {}, y: {}", test1, test2);
-    }
+	throt_val = throt + 32767;
+	throt_val = throt_val * 100;
+	throt_val = throt_val / (32767*2);
+
+        println!("throttle: {}", throt_val);
+      }
 
 }
