@@ -1,9 +1,12 @@
 extern crate joy;
 extern crate rppal;
+extern crate byteorder;
 
+use byteorder::{LittleEndian, WriteBytesExt};
 use std::slice;
 use std::error::Error;
 use std::time::Duration;
+use std::mem;
 
 use rppal::uart::{Parity, Uart};
 
@@ -21,6 +24,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut uart_buffer = [0u8; 1];
 
     let mut f : u8 = 0;
+    let mut throt_u8 = [0u8; mem::size_of::<i32>()];
+
 
     loop {
 
@@ -49,10 +54,12 @@ fn main() -> Result<(), Box<dyn Error>> {
 	
 //	f = f * 2;
 //        println!("yaboi f: {}", f);
-	
-	uart.write(slice::from_mut(&mut throt_val))?;
+	throt_u8.as_mut().write_i32::<LittleEndian>(throt_val).expect("unable to convert");
+//	f = 1000 * throt_u8[0] + 100 * throt_u8[1] + 10 * throt_u8[2] + throt_u8[3];
+	f = throt_u8[0];
+	uart.write(slice::from_mut(&mut f))?;
 
-        println!("throttle: {}", throt_val);
+        println!("throttle: {}, sending: {}", throt_val, f);
     }
 
 }
