@@ -5,3 +5,4 @@ authors = ["jack <jackorton32@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+stick = "0.4.1"

@@ -1,0 +1,14 @@
+[[package]]
+name = "rust_rpi_lora"
+version = "0.1.0"
+dependencies = [
+ "stick 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "stick"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[metadata]
+"checksum stick 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)" = "ef502f5c7ea7b09cd9146fb1d4183242b172206fd27798ad2bb62ea7c2def23e"
