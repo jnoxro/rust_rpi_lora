@@ -6,6 +6,8 @@ use byteorder::{LittleEndian, WriteBytesExt};
 use std::slice;
 use std::error::Error;
 use std::time::Duration;
+use std::time;
+use std::thread;
 use std::mem;
 
 use rppal::uart::{Parity, Uart};
@@ -19,7 +21,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut throt_val: i32  = 0;
     let mut _sink = 0;
 
-    let mut uart = Uart::new(115_200, Parity::None, 8, 1)?;
+    let mut uart = Uart::new(9_600, Parity::None, 8, 1)?;
     uart.set_blocking_mode(1, Duration::default())?;
     let mut uart_buffer = [0u8; 1];
 
@@ -60,6 +62,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 	uart.write(slice::from_mut(&mut f))?;
 
         println!("throttle: {}, sending: {}", throt_val, f);
+
+	thread::sleep(time::Duration::from_millis(50));
     }
 
 }
