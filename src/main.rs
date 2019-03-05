@@ -1,3 +1,9 @@
+//author: Jack Orton
+//Date: 5th March 19
+//program tages the input from a gamepad (in this case a ps3 controller connected via bluetooth.
+//outputs this value over uart serial to a LoRa module (would also work over wire)
+
+
 extern crate joy;
 extern crate rppal;
 extern crate byteorder;
@@ -21,7 +27,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut throt_val: i32  = 0;
     let mut _sink = 0;
 
-    let mut uart = Uart::new(9_600, Parity::None, 8, 1)?;
+    let mut uart = Uart::new(115_200, Parity::None, 8, 1)?;
     uart.set_blocking_mode(1, Duration::default())?;
     let mut uart_buffer = [0u8; 1];
 
@@ -45,8 +51,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 	//convert values
         throt_val = throt + 32767;
-        throt_val = throt_val * 100;
-        throt_val = throt_val / (32767*2);
+        throt_val = throt_val * 100 * 255;
+        throt_val = throt_val / (3276700*2);
 	
 
 //	if uart.read(&mut uart_buffer)? > 0 {
