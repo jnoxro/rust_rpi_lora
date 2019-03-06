@@ -80,13 +80,15 @@ fn main() -> Result<(), Box<dyn Error>> {
 	
 
 //	f = throt_u8[0];
-//	uart.write(slice::from_mut(&mut f))?;
 	f = 0;
 	output.push_str(&throtl_u8[0].to_string());
 	output.push('l');
 	output.push_str(&throtr_u8[0].to_string());
 	output.push('r');
         println!("throtl: {}, throtr: {},  sending: {}", throtl_val, throtr_val,  output);
+
+//	uart.write(slice::from_mut(&mut f))?;
+	uart.write(output.as_bytes())?;
 
 
 
