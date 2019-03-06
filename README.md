@@ -11,9 +11,13 @@ LoRa module: Ebyte E32 868mhz Uart module
 Setup for normal use:
 
 m0  <----------> GND
+
 m1  <----------> GND
+
 GND <----------> GND
+
 VCC <----------> 5V
+
 AUX <--- // ---> Currently not used, but can be to provide more information for transmittion and optimal performance
 
 
