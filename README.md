@@ -1,4 +1,7 @@
 # rust_rpi_lora
+
+(Joystick output over uart with rust intended for LoRa)
+
 Long range LoRa communication with Rpi Zero and Rust
 
 Taking inputs from a joystick on /dev/input/js0 and outputting over serial
